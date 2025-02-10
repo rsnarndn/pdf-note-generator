@@ -16,7 +16,7 @@
       background: #fff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     .upload-section {
       margin-bottom: 20px;
@@ -25,6 +25,7 @@
       border: 1px solid #ccc;
       padding: 10px;
       min-height: 200px;
+      margin-top: 20px;
       background: #fafafa;
     }
   </style>
@@ -43,37 +44,7 @@
       <!-- Generated notes will appear here -->
     </div>
   </div>
-  <script>
-    // Add an event listener for the button
-    document.getElementById('process-btn').addEventListener('click', function() {
-      const fileInput = document.getElementById('pdf-upload');
-      if (fileInput.files.length === 0) {
-        alert('Please upload a PDF file.');
-        return;
-      }
-      const file = fileInput.files[0];
-
-      // Create a FormData object to send the file to your backend
-      const formData = new FormData();
-      formData.append('pdf', file);
-
-      // For demo purposes, we simulate a response. In a real app, you would send the file to your backend API.
-      document.getElementById('notes').innerHTML = '<p>Processing your PDF... (Demo output)</p>';
-
-      // Example of how you might send the file using fetch (uncomment and update your API endpoint):
-      /*
-      fetch('/api/process_pdf', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Display the generated notes in the #notes div
-        document.getElementById('notes').innerHTML = '<p>' + data.summary + '</p>';
-      })
-      .catch(error => console.error('Error:', error));
-      */
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
+

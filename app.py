@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import fitz  # PyMuPDF
-from Summarizer import generate_summary  # Ensure this function is defined in Summarizer.py
+from summarizer import generate_summary  # Ensure this function is defined in Summarizer.py
 
 app = Flask(__name__)
 

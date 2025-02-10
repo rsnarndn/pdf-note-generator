@@ -1,3 +1,6 @@
 Flask
 PyMuPDF
+transformers
+torch
 gunicorn
+

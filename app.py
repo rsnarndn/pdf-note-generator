@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
-import fitz  # PyMuPDF
-from summarizer import generate_summary  # Ensure this function is defined in Summarizer.py
+from io import BytesIO
+from pdfminer.high_level import extract_text
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Flask server is running!"
 
 @app.route('/upload', methods=['POST'])
 def upload_pdf():
@@ -15,24 +19,18 @@ def upload_pdf():
         return jsonify({'error': 'No file selected'}), 400
 
     try:
-        # Read the PDF file as bytes from the in-memory stream
-        file_bytes = file.read()
-        # Open the PDF using PyMuPDF from the in-memory data
-        doc = fitz.open(stream=file_bytes, filetype="pdf")
+        # Read the PDF file into an in-memory stream
+        file_stream = BytesIO(file.read())
+        # Extract text from the PDF using pdfminer.six
+        extracted_text = extract_text(file_stream)
         
-        # Extract text from each page of the PDF
-        extracted_text = ""
-        for page in doc:
-            extracted_text += page.get_text() + "\n"
-        
-        # Generate a summary using your local summarization module
-        summary = generate_summary(extracted_text)
-        
-        # Return the summary as a JSON response
-        return jsonify({'notes': summary})
+        # Optionally, generate a summary using your summarization module:
+        # from summarizer import generate_summary
+        # summary = generate_summary(extracted_text)
+        # For now, we'll return the extracted text for testing:
+        return jsonify({'notes': extracted_text})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-

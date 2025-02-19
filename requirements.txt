@@ -2,5 +2,5 @@ Flask
 PyMuPDF
 transformers
 torch
-gunicorn
+pdfminersix
 

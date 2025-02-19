@@ -3,4 +3,6 @@ PyMuPDF
 transformers
 torch
 pdfminersix
+need to run app.py and upload file using command prompt like   curl -F "pdf=@C:/Users/DELL/Documents/note.pdf"  
+use your directory to upload pdf
 
